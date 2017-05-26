@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import CelestialData from './CelestialData';
 //  import { FormattedMessage } from 'react-intl';
 
@@ -28,6 +28,7 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
   }
 
   componentDidMount() {
+    this.props.getCelestialData(this.canvas, this.canvas.getContext('2d'));
     const celestialData = new CelestialData(this.canvas);
     this.setState(() => ({
       context: this.canvas.getContext('2d'),
@@ -125,6 +126,12 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
       <canvas ref={(ref) => { this.canvas = ref; }}></canvas>
     );
   }
+}
+
+SolarSystem.propTypes = {
+  getCelestialData: PropTypes.func.isRequired,
+  canvas: PropTypes.object,
+  context: PropTypes.object,
 }
 
 export default SolarSystem;

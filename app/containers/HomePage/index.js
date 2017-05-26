@@ -1,10 +1,5 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 //  import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -22,15 +17,13 @@ import Section from './Section';
 //  import messages from './messages';
 
 //  import { loadRepos } from '../App/actions';
-//  import { changeUsername } from './actions';
+import { getCelestialData } from './actions';
 //  import { makeSelectUsername } from './selectors';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
-  componentDidMount() {
 
+  componentDidMount() {
+    this.props.getCelestialData({ });
   }
 
   render() {
@@ -43,7 +36,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           ]}
         />
         <Section>
-          <SolarSystem />
+          <SolarSystem
+            getCelestialData={this.props.getCelestialData}
+            canvas={this.props.canvas}
+            context={this.props.context}
+          />
         </Section>
       </article>
     );
@@ -51,16 +48,22 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 }
 
 HomePage.propTypes = {
-  loading: React.PropTypes.bool,
+  loading: PropTypes.bool,
+  getCelestialData: PropTypes.func,
 };
 
-export function mapDispatchToProps() {
-  return {};
+export function mapDispatchToProps(dispatch) {
+  return {
+    getCelestialData: (canvas, context) => dispatch(getCelestialData(canvas, context)),
+    dispatch,
+  };
 }
 
-const mapStateToProps = createStructuredSelector({
+function mapStateToProps(state) {
+  return {
+    canvas: state.get('canvas'),
+    context: state.get('context'),
+  };
+}
 
-});
-
-// Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
