@@ -3,6 +3,8 @@ class CelestialData {
 
   constructor(canvas) {
     this.canvas = canvas;
+    this.centerWidth = canvas.width / 2;
+    this.centerHeight = canvas.height / 2;
   }
 
   baseBody() {
@@ -29,27 +31,27 @@ class CelestialData {
   sun() {
     return {
       radius: 50,
-      x: 100,
-      y: 120,
+      x: this.centerWidth,
+      y: this.centerHeight,
       fillStyle: 'orange',
     };
   }
 
   mercury() {
     return {
-      radius: 5,
-      x: 100,
-      y: 20,
+      radius: 4.880,
+      x: this.centerWidth,
+      y: this.centerHeight - 70,
       fillStyle: 'red',
-      rotationRatio: 1,
+      rotationRatio: 4.15283,
     };
   }
 
   mercuryOrbit() {
     return {
       radius: 100,
-      x: 100,
-      y: 120,
+      x: this.centerWidth,
+      y: this.centerHeight,
       strokeStyle: 'white',
       lineWidth: 1,
     };
@@ -57,19 +59,39 @@ class CelestialData {
 
   venus() {
     return {
-      radius: 10,
-      x: 100,
-      y: 20,
+      radius: 12.104,
+      x: this.centerWidth,
+      y: this.centerHeight - 120,
       fillStyle: 'purple',
-      rotationRatio: 0.5,
+      rotationRatio: 1.62549,
     };
   }
 
   venusOrbit() {
     return {
       radius: 120,
-      x: 100,
-      y: 120,
+      x: this.centerWidth,
+      y: this.centerHeight,
+      strokeStyle: 'white',
+      lineWidth: 1,
+    };
+  }
+
+  earth() {
+    return {
+      radius: 12.756,
+      x: this.centerWidth,
+      y: this.centerHeight - 140,
+      fillStyle: 'cyan',
+      rotationRatio: 1,
+    };
+  }
+
+  earthOrbit() {
+    return {
+      radius: 140,
+      x: this.centerWidth,
+      y: this.centerHeight,
       strokeStyle: 'white',
       lineWidth: 1,
     };

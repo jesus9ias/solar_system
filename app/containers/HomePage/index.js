@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 //  import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+//  import { createStructuredSelector } from 'reselect';
 
 //  import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 //  import H2 from 'components/H2';
@@ -17,13 +17,19 @@ import Section from './Section';
 //  import messages from './messages';
 
 //  import { loadRepos } from '../App/actions';
-import { getCelestialData } from './actions';
+import { setCelestialData } from './actions';
 //  import { makeSelectUsername } from './selectors';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  componentDidMount() {
-    this.props.getCelestialData({ });
+  constructor(props) {
+    super(props);
+    this.setScale = this.setScale.bind(this);
+    this.state = { scale: 1 };
+  }
+
+  setScale() {
+    this.setState({ scale: this.scaleSelector.value });
   }
 
   render() {
@@ -37,33 +43,45 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         />
         <Section>
           <SolarSystem
-            getCelestialData={this.props.getCelestialData}
-            canvas={this.props.canvas}
+            setCelestialData={this.props.setCelestialData}
             context={this.props.context}
+            scale={this.state.scale}
           />
         </Section>
+        <div>
+          <select onChange={this.setScale} ref={(ref) => { this.scaleSelector = ref; }}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
       </article>
     );
   }
 }
 
 HomePage.propTypes = {
-  loading: PropTypes.bool,
-  getCelestialData: PropTypes.func,
+  //  loading: PropTypes.bool,
+  setCelestialData: PropTypes.func,
+  context: PropTypes.any,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getCelestialData: (canvas, context) => dispatch(getCelestialData(canvas, context)),
+    setCelestialData: (canvas, context, celestialData) => dispatch(setCelestialData(canvas, context, celestialData)),
     dispatch,
   };
 }
 
 function mapStateToProps(state) {
-  return {
-    canvas: state.get('canvas'),
-    context: state.get('context'),
-  };
+  return { context: state.getIn(['home', 'context']) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

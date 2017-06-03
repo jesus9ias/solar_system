@@ -15,8 +15,8 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     this.moveSystem = this.moveSystem.bind(this);
     this.updateSystem = this.updateSystem.bind(this);
     this.state = {
+      scaleRate: 1,
       cycle: null,
-      context: null,
       sun: null,
       mercury: null,
       mercuryOrbit: null,
@@ -24,32 +24,43 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
       venus: null,
       venusOrbit: null,
       venusAngle: 0,
+      earth: null,
+      earthOrbit: null,
+      earthAngle: 0,
     };
   }
 
   componentDidMount() {
-    this.props.getCelestialData(this.canvas, this.canvas.getContext('2d'));
+    this.canvasBase();
     const celestialData = new CelestialData(this.canvas);
+    this.props.setCelestialData(this.canvas, this.canvas.getContext('2d'), celestialData);
     this.setState(() => ({
-      context: this.canvas.getContext('2d'),
       celestialData,
       sun: celestialData.sun(),
       mercury: celestialData.mercury(),
       mercuryOrbit: celestialData.mercuryOrbit(),
       venus: celestialData.venus(),
       venusOrbit: celestialData.venusOrbit(),
+      earth: celestialData.earth(),
+      earthOrbit: celestialData.earthOrbit(),
     }));
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.context !== this.state.context) {
+  componentDidUpdate(prevProps) {
+    const { context } = this.props;
+    if (prevProps.context !== context) {
       this.starting();
       this.moveSystem();
     }
+    /* if (prevProps.scale !== scale) {
+      const newScale = scale / prevProps.scale * this.state.scaleRate;
+      context.scale(newScale, newScale);
+    } */
   }
 
   drawCelestialBody(data) {
-    const { context, celestialData } = this.state;
+    const { celestialData } = this.state;
+    const { context } = this.props;
     const properties = Object.assign(celestialData.baseBody(), data);
     context.beginPath();
     context.arc(properties.x, properties.y, properties.radius, 0, 2 * Math.PI, false);
@@ -62,8 +73,35 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     }
   }
 
+  canvasBase() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = '500';
+    this.canvas.style.background = 'black';
+  }
+
+  starting() {
+    //  this.props.context.scale(1, 2);
+    this.updateSystem();
+  }
+
+  clearCanvas() {
+    this.props.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  moveSystem() {
+    clearInterval(this.state.cycle);
+    if (this.context !== null) {
+      this.updateCelestialBody('mercury');
+      this.updateCelestialBody('venus');
+      this.updateCelestialBody('earth');
+      this.updateSystem();
+    }
+    this.state.cycle = setInterval(this.moveSystem, 10);
+  }
+
   drawOrbit(data) {
-    const { context, celestialData } = this.state;
+    const { celestialData } = this.state;
+    const { context } = this.props;
     const properties = Object.assign(celestialData.baseOrbit(), data);
     const startAngle = 0 * (Math.PI / 180);
     const endAngle = 360 * (Math.PI / 180);
@@ -72,30 +110,6 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     context.beginPath();
     context.arc(properties.x, properties.y, properties.radius, startAngle, endAngle, true);
     context.stroke();
-  }
-
-  canvasBase() {
-    this.canvas.style.width = '100%';
-    this.canvas.style.background = 'black';
-  }
-
-  starting() {
-    this.canvasBase();
-    this.updateSystem();
-  }
-
-  moveSystem() {
-    clearInterval(this.state.cycle);
-    if (this.context !== null) {
-      this.updateCelestialBody('mercury');
-      this.updateCelestialBody('venus');
-      this.updateSystem();
-    }
-    this.state.cycle = setInterval(this.moveSystem, 10);
-  }
-
-  clearCanvas() {
-    this.state.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   updateCelestialBody(planet) {
@@ -119,6 +133,8 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     this.drawCelestialBody(this.state.mercury);
     this.drawOrbit(this.state.venusOrbit);
     this.drawCelestialBody(this.state.venus);
+    this.drawOrbit(this.state.earthOrbit);
+    this.drawCelestialBody(this.state.earth);
   }
 
   render() {
@@ -129,9 +145,12 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
 }
 
 SolarSystem.propTypes = {
-  getCelestialData: PropTypes.func.isRequired,
-  canvas: PropTypes.object,
+  setCelestialData: PropTypes.func.isRequired,
   context: PropTypes.object,
-}
+  /* scale: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]), */
+};
 
 export default SolarSystem;

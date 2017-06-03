@@ -1,22 +1,24 @@
 
 import { fromJS } from 'immutable';
-import CelestialData from '../../components/SolarSystem/CelestialData';
+// import CelestialData from '../../components/SolarSystem/CelestialData';
 
 import {
-  GET_CELESTIAL_DATA,
+  SET_CELESTIAL_DATA,
 } from './constants';
 
 const initialState = fromJS({
-  canvas: {},
-  context: null
+  canvas: null,
+  context: null,
+  celestialData: null,
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_CELESTIAL_DATA:
+    case SET_CELESTIAL_DATA:
       return state
         .set('canvas', action.data.canvas)
-        .set('context', action.data.context);
+        .set('context', action.data.context)
+        .set('celestialData', action.data.celestialData);
     default:
       return state;
   }

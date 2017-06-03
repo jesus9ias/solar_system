@@ -1,11 +1,12 @@
 
 import {
-  GET_CELESTIAL_DATA,
+  SET_CELESTIAL_DATA,
 } from './constants';
 
-export function getCelestialData(canvas, context) {
+//  export function setCelestialData(canvas, context, celestialData) {
+export function setCelestialData(canvas, context) {
   return {
-    type: GET_CELESTIAL_DATA,
+    type: SET_CELESTIAL_DATA,
     data: { canvas, context },
   };
 }
