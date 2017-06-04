@@ -17,7 +17,7 @@ import Section from './Section';
 //  import messages from './messages';
 
 //  import { loadRepos } from '../App/actions';
-import { setCelestialData } from './actions';
+import { setCelestialData, updatePlanetPosition } from './actions';
 //  import { makeSelectUsername } from './selectors';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -33,6 +33,13 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   }
 
   render() {
+    const {
+      setPlanetData,
+      planetPosition,
+      celestialData,
+      context,
+      positions,
+    } = this.props;
     return (
       <article>
         <Helmet
@@ -43,9 +50,12 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         />
         <Section>
           <SolarSystem
-            setCelestialData={this.props.setCelestialData}
-            context={this.props.context}
+            setCelestialData={setPlanetData}
+            updatePlanetPosition={planetPosition}
+            celestialData={celestialData}
+            context={context}
             scale={this.state.scale}
+            positions={positions}
           />
         </Section>
         <div>
@@ -68,20 +78,27 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 }
 
 HomePage.propTypes = {
-  //  loading: PropTypes.bool,
-  setCelestialData: PropTypes.func,
+  setPlanetData: PropTypes.func,
+  planetPosition: PropTypes.func,
   context: PropTypes.any,
+  celestialData: PropTypes.object,
+  positions: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    setCelestialData: (canvas, context, celestialData) => dispatch(setCelestialData(canvas, context, celestialData)),
+    setPlanetData: (canvas, context, celestialData) => dispatch(setCelestialData(canvas, context, celestialData)),
+    planetPosition: (planet) => dispatch(updatePlanetPosition(planet)),
     dispatch,
   };
 }
 
 function mapStateToProps(state) {
-  return { context: state.getIn(['home', 'context']) };
+  return {
+    context: state.getIn(['home', 'context']),
+    celestialData: state.getIn(['home', 'celestialData']),
+    positions: state.getIn(['home', 'planetPositions']),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
