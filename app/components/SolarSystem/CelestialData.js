@@ -10,6 +10,11 @@ class CelestialData {
       'venus',
       'earth',
       'mars',
+      'jupiter',
+      'saturn',
+      'uranus',
+      'neptune',
+      'pluto',
     ];
   }
 
@@ -120,6 +125,106 @@ class CelestialData {
   marsOrbit() {
     return {
       radius: 160,
+      x: this.centerWidth,
+      y: this.centerHeight,
+      strokeStyle: 'white',
+      lineWidth: 1,
+    };
+  }
+
+  jupiter() {
+    return {
+      radius: 142.984,
+      x: this.centerWidth,
+      y: this.centerHeight - 320,
+      fillStyle: '#944332',
+      rotationRatio: 0.08432,
+    };
+  }
+
+  jupiterOrbit() {
+    return {
+      radius: 320,
+      x: this.centerWidth,
+      y: this.centerHeight,
+      strokeStyle: 'white',
+      lineWidth: 1,
+    };
+  }
+
+  saturn() {
+    return {
+      radius: 108.728,
+      x: this.centerWidth,
+      y: this.centerHeight - 430,
+      fillStyle: '#fee4c1',
+      rotationRatio: 0.03395,
+    };
+  }
+
+  saturnOrbit() {
+    return {
+      radius: 430,
+      x: this.centerWidth,
+      y: this.centerHeight,
+      strokeStyle: 'white',
+      lineWidth: 1,
+    };
+  }
+
+  uranus() {
+    return {
+      radius: 51.118,
+      x: this.centerWidth,
+      y: this.centerHeight - 482,
+      fillStyle: '#a3fbff',
+      rotationRatio: 0.01191,
+    };
+  }
+
+  uranusOrbit() {
+    return {
+      radius: 482,
+      x: this.centerWidth,
+      y: this.centerHeight,
+      strokeStyle: 'white',
+      lineWidth: 1,
+    };
+  }
+
+  neptune() {
+    return {
+      radius: 49.532,
+      x: this.centerWidth,
+      y: this.centerHeight - 535,
+      fillStyle: '#3ba1e3',
+      rotationRatio: 0.00601,
+    };
+  }
+
+  neptuneOrbit() {
+    return {
+      radius: 535,
+      x: this.centerWidth,
+      y: this.centerHeight,
+      strokeStyle: 'white',
+      lineWidth: 1,
+    };
+  }
+
+  pluto() {
+    return {
+      radius: 2.320,
+      x: this.centerWidth,
+      y: this.centerHeight - 600,
+      fillStyle: '#6b473b',
+      rotationRatio: 0.00403,
+    };
+  }
+
+  plutoOrbit() {
+    return {
+      radius: 600,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
