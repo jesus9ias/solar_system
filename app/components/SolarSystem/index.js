@@ -37,7 +37,7 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
 
   canvasBase() {
     this.canvas.width = window.innerWidth;
-    this.canvas.height = '500';
+    this.canvas.height = window.innerHeight;
     this.canvas.style.background = 'black';
   }
 
@@ -57,6 +57,7 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
       planets.map((planet) => this.props.updatePlanetPosition(planet));
       this.updateSystem();
     }
+    this.props.yearsElapsed();
     this.state.cycle = setInterval(this.moveSystem, 10);
   }
 
@@ -110,6 +111,7 @@ SolarSystem.propTypes = {
   context: PropTypes.object,
   celestialData: PropTypes.object,
   positions: PropTypes.object,
+  yearsElapsed: PropTypes.func,
   /* scale: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

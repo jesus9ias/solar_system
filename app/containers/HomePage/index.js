@@ -12,7 +12,7 @@ import SolarSystem from 'components/SolarSystem';
 //  import CenteredSection from './CenteredSection';
 
 //  import Form from './Form';
-//  import Input from './Input';
+import BottomBar from '../../components/BottomBar';
 import Section from './Section';
 //  import messages from './messages';
 
@@ -25,11 +25,27 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   constructor(props) {
     super(props);
     this.setScale = this.setScale.bind(this);
-    this.state = { scale: 1 };
+    this.yearsElapsed = this.yearsElapsed.bind(this);
+    this.state = {
+      scale: 1,
+      cycle: 0,
+      year: 0,
+    };
   }
 
   setScale() {
     this.setState({ scale: this.scaleSelector.value });
+  }
+
+  yearsElapsed() {
+    this.setState((prevState) => {
+      const cycle = (prevState.cycle === 360) ? 1 : prevState.cycle + 1;
+      const year = (prevState.cycle === 360) ? prevState.year + 1 : prevState.year;
+      return {
+        cycle,
+        year,
+      };
+    });
   }
 
   render() {
@@ -56,9 +72,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             context={context}
             scale={this.state.scale}
             positions={positions}
+            yearsElapsed={this.yearsElapsed}
           />
         </Section>
-        <div>
+        <BottomBar>
           <select onChange={this.setScale} ref={(ref) => { this.scaleSelector = ref; }}>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -71,7 +88,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             <option value="9">9</option>
             <option value="10">10</option>
           </select>
-        </div>
+          <p>Year: {this.state.year}</p>
+        </BottomBar>
       </article>
     );
   }
