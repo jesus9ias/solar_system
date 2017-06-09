@@ -12,6 +12,7 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     //  this.updateCelestialBody = this.updateCelestialBody.bind(this);
     this.moveSystem = this.moveSystem.bind(this);
     this.updateSystem = this.updateSystem.bind(this);
+    this.resize = this.resize.bind(this);
     this.state = {
       scaleRate: 1,
       cycle: null,
@@ -20,7 +21,7 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
 
   componentDidMount() {
     this.canvasBase();
-    this.props.setCelestialData(this.canvas, this.canvas.getContext('2d'));
+    window.addEventListener('resize', this.resize);
   }
 
   componentDidUpdate(prevProps) {
@@ -35,9 +36,18 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     } */
   }
 
-  canvasBase() {
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
+    this.props.setCelestialData(this.canvas, this.canvas.getContext('2d'));
+  }
+
+  canvasBase() {
+    this.resize();
     this.canvas.style.background = 'black';
   }
 
