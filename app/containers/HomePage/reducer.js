@@ -8,6 +8,7 @@ import CelestialData from '../../components/SolarSystem/CelestialData';
 import {
   SET_CELESTIAL_DATA,
   UPDATE_PLANET_POSITION,
+  MOVE_TO,
 } from './constants';
 
 const initialState = fromJS({
@@ -102,6 +103,19 @@ function homeReducer(state = initialState, action) {
       planetPositions[planet] = Object.assign(planetPositions[planet], newPositions);
       return state
         .set('planetPositions', planetPositions);
+    }
+    case MOVE_TO: {
+      const vPosition = state.get('vPosition');
+      const hPosition = state.get('hPosition');
+      let newVPosition = vPosition;
+      let newHPosition = hPosition;
+      if (action.data.direction === 'up') { newVPosition += 50; }
+      if (action.data.direction === 'right') { newHPosition -= 50; }
+      if (action.data.direction === 'down') { newVPosition -= 50; }
+      if (action.data.direction === 'left') { newHPosition += 50; }
+      return state
+        .set('vPosition', newVPosition)
+        .set('hPosition', newHPosition);
     }
     default: {
       return state;

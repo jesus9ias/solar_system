@@ -1,24 +1,24 @@
 
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
-//  import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-//  import { createStructuredSelector } from 'reselect';
+import styled from 'styled-components';
 
-//  import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
-//  import H2 from 'components/H2';
 import SolarSystem from 'components/SolarSystem';
-//  import AtPrefix from './AtPrefix';
-//  import CenteredSection from './CenteredSection';
-
-//  import Form from './Form';
 import BottomBar from '../../components/BottomBar';
+import SpaceCursor from '../../components/SpaceCursor';
 import Section from './Section';
-//  import messages from './messages';
+import {
+  setCelestialData,
+  updatePlanetPosition,
+  moveTo,
+} from './actions';
 
-//  import { loadRepos } from '../App/actions';
-import { setCelestialData, updatePlanetPosition } from './actions';
-//  import { makeSelectUsername } from './selectors';
+const YearsElapsed = styled.p`
+  margin: 23px 5px;
+  font-size: 16px;
+`;
+
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -57,6 +57,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       positions,
       vPosition,
       hPosition,
+      move,
     } = this.props;
     return (
       <article>
@@ -92,7 +93,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             <option value="9">9</option>
             <option value="10">10</option>
           </select>
-          <p>Year: {this.state.year}</p>
+          <YearsElapsed>Year: {this.state.year}</YearsElapsed>
+          <SpaceCursor moveTo={move} />
         </BottomBar>
       </article>
     );
@@ -107,12 +109,14 @@ HomePage.propTypes = {
   positions: PropTypes.object,
   vPosition: PropTypes.number,
   hPosition: PropTypes.number,
+  move: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     setPlanetData: (canvas, context, celestialData) => dispatch(setCelestialData(canvas, context, celestialData)),
     planetPosition: (planet) => dispatch(updatePlanetPosition(planet)),
+    move: (direction) => dispatch(moveTo(direction)),
     dispatch,
   };
 }
