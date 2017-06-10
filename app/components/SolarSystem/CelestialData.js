@@ -39,13 +39,13 @@ class CelestialData {
       x: 0,
       y: 0,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   sun() {
     return {
-      radius: 50,
+      radius: 139,
       x: this.centerWidth,
       y: this.centerHeight,
       fillStyle: 'orange',
@@ -54,9 +54,9 @@ class CelestialData {
 
   mercury() {
     return {
-      radius: 4.880,
+      radius: 4.880 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 70,
+      y: this.centerHeight - 196,
       fillStyle: '#faf6f3',
       rotationRatio: 4.15283,
     };
@@ -64,19 +64,19 @@ class CelestialData {
 
   mercuryOrbit() {
     return {
-      radius: 100,
+      radius: 196,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   venus() {
     return {
-      radius: 12.104,
+      radius: 12.104 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 120,
+      y: this.centerHeight - 247,
       fillStyle: '#d05301',
       rotationRatio: 1.62549,
     };
@@ -84,19 +84,19 @@ class CelestialData {
 
   venusOrbit() {
     return {
-      radius: 120,
+      radius: 247,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   earth() {
     return {
-      radius: 12.756,
+      radius: 12.756 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 140,
+      y: this.centerHeight - 285,
       fillStyle: '#5dce36',
       rotationRatio: 1,
     };
@@ -104,19 +104,19 @@ class CelestialData {
 
   earthOrbit() {
     return {
-      radius: 140,
+      radius: 285,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   mars() {
     return {
-      radius: 6.794,
+      radius: 6.794 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 160,
+      y: this.centerHeight - 366,
       fillStyle: '#d21102',
       rotationRatio: 0.53167,
     };
@@ -124,19 +124,19 @@ class CelestialData {
 
   marsOrbit() {
     return {
-      radius: 160,
+      radius: 366,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   jupiter() {
     return {
-      radius: 142.984,
+      radius: 142.984 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 320,
+      y: this.centerHeight - 917,
       fillStyle: '#944332',
       rotationRatio: 0.08432,
     };
@@ -144,19 +144,19 @@ class CelestialData {
 
   jupiterOrbit() {
     return {
-      radius: 320,
+      radius: 917,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   saturn() {
     return {
-      radius: 108.728,
+      radius: 108.728 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 430,
+      y: this.centerHeight - 1568,
       fillStyle: '#fee4c1',
       rotationRatio: 0.03395,
     };
@@ -164,19 +164,19 @@ class CelestialData {
 
   saturnOrbit() {
     return {
-      radius: 430,
+      radius: 1568,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   uranus() {
     return {
-      radius: 51.118,
+      radius: 51.118 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 482,
+      y: this.centerHeight - 3009,
       fillStyle: '#a3fbff',
       rotationRatio: 0.01191,
     };
@@ -184,19 +184,19 @@ class CelestialData {
 
   uranusOrbit() {
     return {
-      radius: 482,
+      radius: 3009,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   neptune() {
     return {
-      radius: 49.532,
+      radius: 49.532 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 535,
+      y: this.centerHeight - 4644,
       fillStyle: '#3ba1e3',
       rotationRatio: 0.00601,
     };
@@ -204,31 +204,31 @@ class CelestialData {
 
   neptuneOrbit() {
     return {
-      radius: 535,
+      radius: 4644,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 
   pluto() {
     return {
-      radius: 2.320,
+      radius: 2.320 / 2,
       x: this.centerWidth,
-      y: this.centerHeight - 600,
-      fillStyle: '#6b473b',
+      y: this.centerHeight - 6073,
+      fillStyle: '#ffffff',
       rotationRatio: 0.00403,
     };
   }
 
   plutoOrbit() {
     return {
-      radius: 600,
+      radius: 6073,
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 1,
+      lineWidth: 0.5,
     };
   }
 }

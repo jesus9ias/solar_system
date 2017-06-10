@@ -55,6 +55,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       celestialData,
       context,
       positions,
+      vPosition,
+      hPosition,
     } = this.props;
     return (
       <article>
@@ -73,6 +75,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             scale={this.state.scale}
             positions={positions}
             yearsElapsed={this.yearsElapsed}
+            vPosition={vPosition}
+            hPosition={hPosition}
           />
         </Section>
         <BottomBar>
@@ -101,6 +105,8 @@ HomePage.propTypes = {
   context: PropTypes.any,
   celestialData: PropTypes.object,
   positions: PropTypes.object,
+  vPosition: PropTypes.number,
+  hPosition: PropTypes.number,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -116,6 +122,8 @@ function mapStateToProps(state) {
     context: state.getIn(['home', 'context']),
     celestialData: state.getIn(['home', 'celestialData']),
     positions: state.getIn(['home', 'planetPositions']),
+    vPosition: state.getIn(['home', 'vPosition']),
+    hPosition: state.getIn(['home', 'hPosition']),
   };
 }
 

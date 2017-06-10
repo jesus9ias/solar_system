@@ -9,7 +9,6 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     this.clearCanvas = this.clearCanvas.bind(this);
     this.canvasBase = this.canvasBase.bind(this);
     this.drawCelestialBody = this.drawCelestialBody.bind(this);
-    //  this.updateCelestialBody = this.updateCelestialBody.bind(this);
     this.moveSystem = this.moveSystem.bind(this);
     this.updateSystem = this.updateSystem.bind(this);
     this.resize = this.resize.bind(this);
@@ -72,10 +71,15 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
   }
 
   drawCelestialBody(data) {
-    const { context, celestialData } = this.props;
+    const {
+      context,
+      celestialData,
+      hPosition,
+      vPosition,
+    } = this.props;
     const properties = Object.assign(celestialData.baseBody(), data);
     context.beginPath();
-    context.arc(properties.x, properties.y, properties.radius, 0, 2 * Math.PI, false);
+    context.arc(properties.x + hPosition, properties.y + vPosition, properties.radius, 0, 2 * Math.PI, false);
     context.fillStyle = properties.fillStyle;
     context.fill();
     if (properties.lineWidth > 0) {
@@ -86,14 +90,19 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
   }
 
   drawOrbit(data) {
-    const { context, celestialData } = this.props;
+    const {
+      context,
+      celestialData,
+      hPosition,
+      vPosition,
+    } = this.props;
     const properties = Object.assign(celestialData.baseOrbit(), data);
     const startAngle = 0 * (Math.PI / 180);
     const endAngle = 360 * (Math.PI / 180);
     context.strokeStyle = properties.strokeStyle;
     context.lineWidth = properties.lineWidth;
     context.beginPath();
-    context.arc(properties.x, properties.y, properties.radius, startAngle, endAngle, true);
+    context.arc(properties.x + hPosition, properties.y + vPosition, properties.radius, startAngle, endAngle, true);
     context.stroke();
   }
 
@@ -122,10 +131,8 @@ SolarSystem.propTypes = {
   celestialData: PropTypes.object,
   positions: PropTypes.object,
   yearsElapsed: PropTypes.func,
-  /* scale: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]), */
+  vPosition: PropTypes.number,
+  hPosition: PropTypes.number,
 };
 
 export default SolarSystem;

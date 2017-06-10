@@ -14,6 +14,8 @@ const initialState = fromJS({
   canvas: null,
   context: null,
   celestialData: null,
+  vPosition: 0,
+  hPosition: 0,
   planetPositions: {
     scaleRate: 1,
     cycle: null,
