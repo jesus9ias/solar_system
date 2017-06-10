@@ -39,7 +39,7 @@ class CelestialData {
       x: 0,
       y: 0,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -68,7 +68,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -88,7 +88,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -108,7 +108,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -128,7 +128,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -148,7 +148,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -168,7 +168,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -188,7 +188,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -208,7 +208,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 
@@ -228,7 +228,7 @@ class CelestialData {
       x: this.centerWidth,
       y: this.centerHeight,
       strokeStyle: 'white',
-      lineWidth: 0.5,
+      lineWidth: 0.8,
     };
   }
 }

@@ -13,7 +13,6 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
     this.updateSystem = this.updateSystem.bind(this);
     this.resize = this.resize.bind(this);
     this.state = {
-      scaleRate: 1,
       cycle: null,
     };
   }
@@ -24,15 +23,15 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
   }
 
   componentDidUpdate(prevProps) {
-    const { context } = this.props;
+    const { context, scale } = this.props;
     if (prevProps.context !== context) {
       this.starting();
       this.moveSystem();
     }
-    /* if (prevProps.scale !== scale) {
-      const newScale = scale / prevProps.scale * this.state.scaleRate;
+    if (prevProps.scale !== scale) {
+      const newScale = prevProps.scale / scale;
       context.scale(newScale, newScale);
-    } */
+    }
   }
 
   componentWillUnmount() {
@@ -51,12 +50,12 @@ class SolarSystem extends React.Component { // eslint-disable-line react/prefer-
   }
 
   starting() {
-    //  this.props.context.scale(1, 2);
+    this.props.context.scale(1 / this.props.scale, 1 / this.props.scale);
     this.updateSystem();
   }
 
   clearCanvas() {
-    this.props.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.props.context.clearRect(0, 0, this.canvas.width * this.props.scale, this.canvas.height * this.props.scale);
   }
 
   moveSystem() {
@@ -133,6 +132,10 @@ SolarSystem.propTypes = {
   yearsElapsed: PropTypes.func,
   vPosition: PropTypes.number,
   hPosition: PropTypes.number,
+  scale: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 export default SolarSystem;

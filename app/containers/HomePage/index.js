@@ -19,6 +19,11 @@ const YearsElapsed = styled.p`
   font-size: 16px;
 `;
 
+const ScaleBlock = styled.div`
+  display: flex;
+  padding: 23px 0px;
+`;
+
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -81,18 +86,19 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           />
         </Section>
         <BottomBar>
-          <select onChange={this.setScale} ref={(ref) => { this.scaleSelector = ref; }}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
+          <ScaleBlock>
+            <p style={{ margin: '0px' }}>Scale</p>
+            <select
+              onChange={this.setScale}
+              ref={(ref) => { this.scaleSelector = ref; }}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </ScaleBlock>
           <YearsElapsed>Year: {this.state.year}</YearsElapsed>
           <SpaceCursor moveTo={move} />
         </BottomBar>

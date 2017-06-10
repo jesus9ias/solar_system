@@ -109,10 +109,10 @@ function homeReducer(state = initialState, action) {
       const hPosition = state.get('hPosition');
       let newVPosition = vPosition;
       let newHPosition = hPosition;
-      if (action.data.direction === 'up') { newVPosition += 50; }
-      if (action.data.direction === 'right') { newHPosition -= 50; }
-      if (action.data.direction === 'down') { newVPosition -= 50; }
-      if (action.data.direction === 'left') { newHPosition += 50; }
+      if (action.data.direction === 'up') { newVPosition += 100; }
+      if (action.data.direction === 'right') { newHPosition -= 100; }
+      if (action.data.direction === 'down') { newVPosition -= 100; }
+      if (action.data.direction === 'left') { newHPosition += 100; }
       return state
         .set('vPosition', newVPosition)
         .set('hPosition', newHPosition);
